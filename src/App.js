@@ -1,15 +1,15 @@
-import React, { useState, useReducer } from "react";
+import React, { useState } from "react";
 import Form from "react-jsonschema-form";
 import { Card, Row, Col } from "reactstrap";
 import { SchemaTypes } from "./types";
 
-function App(props) {
+function App() {
 	const [schema, setSchema] = useState({
 		title: "New Form",
 		properties: {},
 	});
-	const [uiSchema, setUiSchema] = useState({});
-	const [formData, setFormData] = useState({});
+	const [uiSchema] = useState({});
+	const [formData] = useState({});
 
 	const handleChangeSchema = (e) => {
 		console.log(e.schema);
