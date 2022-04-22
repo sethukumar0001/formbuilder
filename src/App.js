@@ -27,10 +27,12 @@ function App() {
 	// const [uiSchema, setUiSchema] = useState({})
 	const [formData] = useState({});
 	const [isOpen, setIsOpen] = useState(false);
+	const [disabled] = useState(false)
 
 	const [isOpen1, setIsOpen1] = useState(false);
 	const [isOpen2, setIsOpen2] = useState(false);
 	const [isOpen3, setIsOpen3] = useState(false);
+	const [isOpen4, setIsOpen4] = useState(false);
 
 	const [deleteModal, setDeleteModal] = useState(false);
 
@@ -56,7 +58,9 @@ function App() {
 	const handleModal3 = () => {
 		setIsOpen3(!isOpen3);
 	};
-
+	const handleModal4 = () => {
+		setIsOpen4(!isOpen4);
+	};
 	const handleDeleteModal = (item) => {
 		setDeleteName(item);
 		setDeleteModal(!deleteModal);
@@ -72,9 +76,12 @@ function App() {
 			...schema,
 			properties: Object.assign(properties, e.schema),
 		});
-		setUiSchema({...uiSchema,
-			[e.name]:e.schema[e.name].defaultUiSchema?e.schema[e.name].defaultUiSchema:{}
-		})
+		setUiSchema({
+			...uiSchema,
+			[e.name]: e.schema[e.name].defaultUiSchema
+				? e.schema[e.name].defaultUiSchema
+				: {},
+		});
 	};
 
 	const handleDelete = () => {
@@ -103,41 +110,78 @@ function App() {
 		handleModal3();
 	};
 
+	const handleOnChange = (formData) => {
+		// console.log(formData.formData)
+	}
+
 	/* -------------------------------------------------------------------------- */
 	/*                               API Section                                  */
 	/* -------------------------------------------------------------------------- */
-	const FormAction = ({ schema, uiSchema, formData }) => (
+	const FormAction = (props) => (
 		<Form
-			schema={schema}
-			uiSchema={uiSchema}
-			formData={formData}
+			schema={props.schema}
+			uiSchema={props.uiSchema}
+			formData={props.formData}
 			liveOmit
 			children={true} //remove delete
-			// onChange={console.log("changed")}
+			onChange={props.handleOnChange}
 			// onSubmit={console.log("submitted")}
 			// onError={console.log("errors")}
 			// liveValidate
 			showErrorList={false}
+			disabled={props.disabled}
 		/>
 	);
-	console.log(uiSchema);
+
 	return (
 		<Fragment>
-			<div
-				className="text-center mt-3"
-				style={{ cursor: "pointer" }}
-				onClick={handleModal1}
-			>
-				View Schema
+			<div className="d-flex mt-4">
+				<div
+					className="text-center mt-3"
+					style={{
+						cursor: "pointer",
+						marginLeft: 20,
+						borderWidth: "1px",
+						borderColor: "lightGray",
+						borderStyle: "solid",
+						padding: "5px",
+						borderRadius: "5px",
+					}}
+					onClick={handleModal1}
+				>
+					View Schema
+				</div>
+				<div
+					className="text-center mt-3"
+					style={{
+						cursor: "pointer",
+						marginLeft: 20,
+						borderWidth: "1px",
+						borderColor: "lightGray",
+						borderStyle: "solid",
+						padding: "5px",
+						borderRadius: "5px",
+					}}
+					onClick={handleModal2}
+				>
+					View UI Schema
+				</div>
+				{/* <div
+					className="text-center mt-3"
+					style={{
+						cursor: "pointer",
+						marginLeft: 20,
+						borderWidth: "1px",
+						borderColor: "lightGray",
+						borderStyle: "solid",
+						padding: "5px",
+						borderRadius: "5px",
+					}}
+					onClick={handleModal4}
+				>
+					View Form Data
+				</div> */}
 			</div>
-			<div
-				className="text-center mt-3"
-				style={{ cursor: "pointer" }}
-				onClick={handleModal2}
-			>
-				View UI Schema
-			</div>
-
 			<div className="d-flex justify-center-between mt-5 align-content-center">
 				<div style={{ width: "33%" }} className="p-2">
 					<Card style={{ minHeight: "610px" }}>
@@ -238,6 +282,8 @@ function App() {
 								schema={schema}
 								uiSchema={uiSchema}
 								formData={formData}
+								handleOnChange={handleOnChange}
+								disabled={disabled}
 							/>
 						</div>
 					</Card>
@@ -274,6 +320,19 @@ function App() {
 						<Button
 							style={{ background: "#0dcaf0", border: "none" }}
 							onClick={handleModal2}
+						>
+							Cancel
+						</Button>
+					</ModalFooter>
+				</Modal>
+
+				{/* ui schema Modal */}
+				<Modal toggle={handleModal4} isOpen={isOpen4} centered>
+					<ModalBody>{JSON.stringify(formData)}</ModalBody>
+					<ModalFooter>
+						<Button
+							style={{ background: "#0dcaf0", border: "none" }}
+							onClick={handleModal4}
 						>
 							Cancel
 						</Button>

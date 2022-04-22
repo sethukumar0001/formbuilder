@@ -64,6 +64,7 @@ export const SchemaTypes = [
 				id: 4,
 				defaultUiSchema: {
 					"ui:widget": "select",
+					"ui:placeholder": "Select",
 				},
 			},
 		},
@@ -177,6 +178,40 @@ export const SchemaTypes = [
 				id: 12,
 				defaultUiSchema: {
 					"ui:widget": "range",
+				},
+			},
+		},
+	},
+	{
+		name: "date",
+		schema: {
+			date: {
+				type: "string",
+				format: "date",
+			},
+		},
+	},
+
+	{
+		name: "datetime",
+		schema: {
+			datetime: {
+				type: "string",
+				format: "date-time",
+			},
+		},
+	},
+	{
+		name: "alt-date",
+		schema: {
+			"alt-date": {
+				type: "string",
+				format: "date",
+				defaultUiSchema: {
+					"ui:widget": "alt-date",
+					"ui:options": {
+						yearsRange: [1980, 2030],
+					},
 				},
 			},
 		},
