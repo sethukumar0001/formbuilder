@@ -5,6 +5,8 @@ export const SchemaTypes = [
 			email: {
 				type: "string",
 				format: "email",
+				title: "email",
+				id: 0,
 			},
 		},
 	},
@@ -14,6 +16,8 @@ export const SchemaTypes = [
 			uri: {
 				type: "string",
 				format: "uri",
+				title: "uri",
+				id: 1,
 			},
 		},
 	},
@@ -24,6 +28,7 @@ export const SchemaTypes = [
 				type: "boolean",
 				title: "checkbox (default)",
 				description: "This is the checkbox-description",
+				id: 2,
 			},
 		},
 	},
@@ -34,6 +39,7 @@ export const SchemaTypes = [
 				type: "string",
 				title: "radio buttons",
 				description: "This is the radio-description",
+				id: 3,
 				// "ui:widget": "radio"
 			},
 		},
@@ -45,6 +51,7 @@ export const SchemaTypes = [
 				type: "boolean",
 				title: "select box",
 				description: "This is the select-description",
+				id: 4,
 				// "ui:widget": "select",
 			},
 		},
@@ -55,6 +62,7 @@ export const SchemaTypes = [
 			text: {
 				type: "string",
 				title: "text input (default)",
+				id: 5,
 			},
 		},
 	},
@@ -65,6 +73,7 @@ export const SchemaTypes = [
 				type: "string",
 				title: "color picker",
 				default: "#151ce6",
+				id: 6,
 				// "ui:widget": "color"
 			},
 		},
@@ -75,6 +84,8 @@ export const SchemaTypes = [
 			textarea: {
 				type: "string",
 				format: "textarea",
+				title: "textarea",
+				id: 7,
 				// "ui:widget": "textarea",
 				// "ui:options": {
 				//   "rows": 5
@@ -88,6 +99,7 @@ export const SchemaTypes = [
 			number: {
 				title: "Number",
 				type: "number",
+				id: 8,
 			},
 		},
 	},
@@ -97,6 +109,7 @@ export const SchemaTypes = [
 			integer: {
 				title: "Integer",
 				type: "integer",
+				id: 9,
 				// "ui:widget": "updown"
 			},
 		},
@@ -109,6 +122,7 @@ export const SchemaTypes = [
 				type: "number",
 				title: "Number enum",
 				enum: [1, 2, 3],
+				id: 10,
 				// "ui:widget": "radio",
 				// "ui:options": {
 				//   "inline": true
@@ -124,6 +138,7 @@ export const SchemaTypes = [
 				type: "integer",
 				minimum: 42,
 				maximum: 100,
+				id: 11,
 				// "ui:widget": "range"
 			},
 		},
@@ -137,6 +152,7 @@ export const SchemaTypes = [
 				minimum: 50,
 				maximum: 100,
 				multipleOf: 10,
+				id: 12,
 				// "ui:widget": "range"
 			},
 		},
