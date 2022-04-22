@@ -89,10 +89,10 @@ function App() {
 	return (
 		<Fragment>
 			<div className="text-center mt-3" onClick={handleModal1}>
-				<a className="text-center mt-3">View Schema</a>
+				<a className="text-center mt-3" href="#">View Schema</a>
 			</div>
 			<div className="text-center mt-3" onClick={handleModal2}>
-				<a className="text-center mt-3">View UI Schema</a>
+				<a className="text-center mt-3" href="#">View UI Schema</a>
 			</div>
 
 			<div className="d-flex justify-center-between mt-5 align-content-center">
