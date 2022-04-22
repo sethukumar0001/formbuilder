@@ -29,6 +29,9 @@ export const SchemaTypes = [
 				title: "checkbox (default)",
 				description: "This is the checkbox-description",
 				id: 2,
+				defaultUiSchema: {
+					classNames: "col-xs-12",
+				},
 			},
 		},
 	},
@@ -40,7 +43,14 @@ export const SchemaTypes = [
 				title: "radio buttons",
 				description: "This is the radio-description",
 				id: 3,
-				// "ui:widget": "radio"
+				oneOf: [
+					{ const: 1, title: "One" },
+					{ const: 2, title: "Two" },
+					{ const: 3, title: "Three" },
+				],
+				defaultUiSchema: {
+					"ui:widget": "radio",
+				},
 			},
 		},
 	},
@@ -52,7 +62,9 @@ export const SchemaTypes = [
 				title: "select box",
 				description: "This is the select-description",
 				id: 4,
-				// "ui:widget": "select",
+				defaultUiSchema: {
+					"ui:widget": "select",
+				},
 			},
 		},
 	},
@@ -74,7 +86,9 @@ export const SchemaTypes = [
 				title: "color picker",
 				default: "#151ce6",
 				id: 6,
-				// "ui:widget": "color"
+				defaultUiSchema: {
+					"ui:widget": "color",
+				},
 			},
 		},
 	},
@@ -86,10 +100,12 @@ export const SchemaTypes = [
 				format: "textarea",
 				title: "textarea",
 				id: 7,
-				// "ui:widget": "textarea",
-				// "ui:options": {
-				//   "rows": 5
-				// }
+				defaultUiSchema: {
+					"ui:widget": "textarea",
+					"ui:options": {
+						rows: 5,
+					},
+				},
 			},
 		},
 	},
@@ -110,7 +126,9 @@ export const SchemaTypes = [
 				title: "Integer",
 				type: "integer",
 				id: 9,
-				// "ui:widget": "updown"
+				defaultUiSchema: {
+					"ui:widget": "updown",
+				},
 			},
 		},
 	},
@@ -123,10 +141,12 @@ export const SchemaTypes = [
 				title: "Number enum",
 				enum: [1, 2, 3],
 				id: 10,
-				// "ui:widget": "radio",
-				// "ui:options": {
-				//   "inline": true
-				// }
+				defaultUiSchema: {
+					"ui:widget": "radio",
+					"ui:options": {
+						inline: true,
+					},
+				},
 			},
 		},
 	},
@@ -139,7 +159,9 @@ export const SchemaTypes = [
 				minimum: 42,
 				maximum: 100,
 				id: 11,
-				// "ui:widget": "range"
+				defaultUiSchema: {
+					"ui:widget": "range",
+				},
 			},
 		},
 	},
@@ -153,7 +175,9 @@ export const SchemaTypes = [
 				maximum: 100,
 				multipleOf: 10,
 				id: 12,
-				// "ui:widget": "range"
+				defaultUiSchema: {
+					"ui:widget": "range",
+				},
 			},
 		},
 	},

@@ -18,18 +18,13 @@ function App() {
 	/* -------------------------------------------------------------------------- */
 	/*                               UseState Section                             */
 	/* -------------------------------------------------------------------------- */
+	const [uiSchema, setUiSchema] = useState({});
 
 	const [schema, setSchema] = useState({
-		title: "New Form",
+		title: "Test",
 		properties: {},
 	});
-	const [uiSchema] = useState({
-		firstName: {
-			"ui:autofocus": true,
-			"ui:emptyValue": "",
-			"ui:autocomplete": "family-name",
-		},
-	});
+	// const [uiSchema, setUiSchema] = useState({})
 	const [formData] = useState({});
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -77,6 +72,9 @@ function App() {
 			...schema,
 			properties: Object.assign(properties, e.schema),
 		});
+		setUiSchema({...uiSchema,
+			[e.name]:e.schema[e.name].defaultUiSchema?e.schema[e.name].defaultUiSchema:{}
+		})
 	};
 
 	const handleDelete = () => {
@@ -114,13 +112,15 @@ function App() {
 			uiSchema={uiSchema}
 			formData={formData}
 			liveOmit
+			children={true} //remove delete
 			// onChange={console.log("changed")}
 			// onSubmit={console.log("submitted")}
 			// onError={console.log("errors")}
-			liveValidate
+			// liveValidate
 			showErrorList={false}
 		/>
 	);
+	console.log(uiSchema);
 	return (
 		<Fragment>
 			<div
