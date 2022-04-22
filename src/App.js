@@ -88,11 +88,11 @@ function App() {
 
 	return (
 		<Fragment>
-			<div className="text-center mt-3" onClick={handleModal1}>
-				<a className="text-center mt-3" href="#">View Schema</a>
+			<div className="text-center mt-3" style={{cursor:'pointer'}} onClick={handleModal1}>
+				View Schema
 			</div>
-			<div className="text-center mt-3" onClick={handleModal2}>
-				<a className="text-center mt-3" href="#">View UI Schema</a>
+			<div className="text-center mt-3" style={{cursor:'pointer'}} onClick={handleModal2}>
+				View UI Schema
 			</div>
 
 			<div className="d-flex justify-center-between mt-5 align-content-center">
