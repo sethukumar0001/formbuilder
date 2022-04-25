@@ -4,16 +4,15 @@ import {
 	Card,
 	Row,
 	Col,
-	Modal,
-	ModalBody,
-	ModalFooter,
-	Button,
-	Label,
-	Input,
-	ModalHeader,
 } from "reactstrap";
 import { SchemaTypes } from "./types";
 import DeleteLogo from "./svg/delete.svg";
+import DuplicateAddModal from "./modal/dupAddModal";
+import DeleteModal from "./modal/deleteModal";
+import SettingsModal from "./modal/settingsModal";
+import UiSchemaModal from "./modal/uiSchemaModal";
+import SchemaModal from "./modal/schemaModal";
+import EditModal from "./modal/editModal";
 function App() {
 	/* -------------------------------------------------------------------------- */
 	/*                               UseState Section                             */
@@ -27,7 +26,8 @@ function App() {
 	// const [uiSchema, setUiSchema] = useState({})
 	const [formData] = useState({});
 	const [isOpen, setIsOpen] = useState(false);
-	const [disabled] = useState(false)
+	// settings
+	const [disabled, setDisabled] = useState(false);
 
 	const [isOpen1, setIsOpen1] = useState(false);
 	const [isOpen2, setIsOpen2] = useState(false);
@@ -112,7 +112,7 @@ function App() {
 
 	const handleOnChange = (formData) => {
 		// console.log(formData.formData)
-	}
+	};
 
 	/* -------------------------------------------------------------------------- */
 	/*                               API Section                                  */
@@ -130,6 +130,7 @@ function App() {
 			// liveValidate
 			showErrorList={false}
 			disabled={props.disabled}
+			readonly={props.readonly}
 		/>
 	);
 
@@ -166,7 +167,7 @@ function App() {
 				>
 					View UI Schema
 				</div>
-				{/* <div
+				<div
 					className="text-center mt-3"
 					style={{
 						cursor: "pointer",
@@ -179,8 +180,8 @@ function App() {
 					}}
 					onClick={handleModal4}
 				>
-					View Form Data
-				</div> */}
+					Settings
+				</div>
 			</div>
 			<div className="d-flex justify-center-between mt-5 align-content-center">
 				<div style={{ width: "33%" }} className="p-2">
@@ -289,111 +290,36 @@ function App() {
 					</Card>
 				</div>
 
-				{/* Edit Modal */}
-				<Modal toggle={handleModal} isOpen={isOpen} centered>
-					<ModalBody></ModalBody>
-					<ModalFooter>
-						<Button
-							style={{ background: "#0dcaf0", border: "none" }}
-							onClick={handleModal}
-						>
-							Cancel
-						</Button>
-					</ModalFooter>
-				</Modal>
-				{/* schema Modal */}
-				<Modal toggle={handleModal1} isOpen={isOpen1} centered>
-					<ModalBody>{<pre>{JSON.stringify(schema, null, 2)}</pre>}</ModalBody>
-					<ModalFooter>
-						<Button
-							style={{ background: "#0dcaf0", border: "none" }}
-							onClick={handleModal1}
-						>
-							Cancel
-						</Button>
-					</ModalFooter>
-				</Modal>
-				{/* ui schema Modal */}
-				<Modal toggle={handleModal2} isOpen={isOpen2} centered>
-					<ModalBody>{JSON.stringify(uiSchema)}</ModalBody>
-					<ModalFooter>
-						<Button
-							style={{ background: "#0dcaf0", border: "none" }}
-							onClick={handleModal2}
-						>
-							Cancel
-						</Button>
-					</ModalFooter>
-				</Modal>
-
-				{/* ui schema Modal */}
-				<Modal toggle={handleModal4} isOpen={isOpen4} centered>
-					<ModalBody>{JSON.stringify(formData)}</ModalBody>
-					<ModalFooter>
-						<Button
-							style={{ background: "#0dcaf0", border: "none" }}
-							onClick={handleModal4}
-						>
-							Cancel
-						</Button>
-					</ModalFooter>
-				</Modal>
-
-				{/* ui schema Modal */}
-				<Modal toggle={handleModal3} isOpen={isOpen3} centered>
-					<ModalBody>
-						<Label>Field Name</Label>
-						<Input
-							type="text"
-							value={editedTitle}
-							onChange={(e) => setEditedTitle(e.target.value)}
-						/>
-						<p style={{ color: "red", marginTop: "10px" }}>
-							Note : Field name should be unique
-						</p>
-					</ModalBody>
-					<ModalFooter>
-						<Button
-							style={{ background: "#0dcaf0", border: "none" }}
-							onClick={handleChangeFieldName}
-							disabled={!editedTitle}
-						>
-							Add
-						</Button>
-						<Button
-							style={{ background: "#0dcaf0", border: "none" }}
-							onClick={handleModal3}
-						>
-							Cancel
-						</Button>
-					</ModalFooter>
-				</Modal>
-
-				{/* Delete Modal */}
-				<Modal toggle={handleDeleteModal} isOpen={deleteModal} centered>
-					<ModalHeader>
-						<h2>Delete</h2>
-					</ModalHeader>
-					<ModalBody>
-						<p>
-							Are you sure want to delete <b>{deleteName}</b>?
-						</p>
-					</ModalBody>
-					<ModalFooter>
-						<Button
-							style={{ background: "red", border: "none" }}
-							onClick={handleDelete}
-						>
-							Yes
-						</Button>
-						<Button
-							style={{ background: "#0dcaf0", border: "none" }}
-							onClick={handleDeleteModal}
-						>
-							No
-						</Button>
-					</ModalFooter>
-				</Modal>
+				<EditModal isOpen={isOpen} handleModal={handleModal} />
+				<SchemaModal
+					isOpen1={isOpen1}
+					handleModal1={handleModal1}
+					schema={schema}
+				/>
+				<UiSchemaModal
+					isOpen2={isOpen2}
+					handleModal2={handleModal2}
+					uiSchema={uiSchema}
+				/>
+				<SettingsModal
+					isOpen4={isOpen4}
+					handleModal4={handleModal4}
+					disabled={disabled}
+					setDisabled={setDisabled}
+				/>
+				<DuplicateAddModal
+					isOpen3={isOpen3}
+					handleModal3={handleModal3}
+					handleChangeFieldName={handleChangeFieldName}
+					editedTitle={editedTitle}
+					setEditedTitle={setEditedTitle}
+				/>
+				<DeleteModal
+					deleteModal={deleteModal}
+					deleteName={deleteName}
+					handleDeleteModal={handleDeleteModal}
+					handleDelete={handleDelete}
+				/>
 			</div>
 		</Fragment>
 	);
