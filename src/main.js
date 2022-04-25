@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Card } from "reactstrap";
 
 function MainPage(props) {
 	return (
@@ -10,7 +11,7 @@ function MainPage(props) {
 				alignContent: "center",
 			}}
 		>
-			<div
+			<Card
 				style={{
 					marginLeft: "25%",
 					width: "100%",
@@ -25,8 +26,8 @@ function MainPage(props) {
 						Form Builder -Scratch
 					</p>
 				</NavLink>
-			</div>
-			<div
+			</Card>
+			<Card
 				style={{
 					marginRight: "25%",
 					marginTop: "20%",
@@ -41,7 +42,7 @@ function MainPage(props) {
 						Form Builder - React-jsonschema-form
 					</p>
 				</NavLink>
-			</div>
+			</Card>
 		</div>
 	);
 }

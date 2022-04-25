@@ -6,7 +6,7 @@ import {
 	Col,
 } from "reactstrap";
 import { SchemaTypes } from "./types";
-import DeleteLogo from "./svg/delete.svg";
+import DeleteLogo from "../svg/delete.svg";
 import DuplicateAddModal from "./modal/dupAddModal";
 import DeleteModal from "./modal/deleteModal";
 import SettingsModal from "./modal/settingsModal";
@@ -256,7 +256,7 @@ function BuilderFromNPM() {
 												</Col>
 												<Col md="2" onClick={handleModal}>
 													<img
-														src={require(`./images/edit.png`)}
+														src={require(`../images/edit.png`)}
 														alt="Edit Logo"
 														style={{ height: 25 }}
 													/>
