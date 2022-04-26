@@ -58,8 +58,8 @@ function BuilderFromScratch(props) {
 	};
 	console.log(selectedFields);
 
-	const handleChangePreview = (name,value,key,type) => {
-		if(type === 'string'){
+	const handleChangePreview = (name, value, key, type) => {
+		if (type === "string") {
 			setSelectedFields(
 				selectedFields.map((x, index) => {
 					if (index !== key) return x;
@@ -70,11 +70,16 @@ function BuilderFromScratch(props) {
 				})
 			);
 		}
-	}
+	};
 	return (
 		<Fragment>
 			<div style={{ float: "right", marginRight: "30px", marginTop: "30px" }}>
-				<Button onClick={handleModalPreview}>Preview</Button>
+				<Button
+					onClick={handleModalPreview}
+					disabled={selectedFields.length === 0}
+				>
+					Preview
+				</Button>
 			</div>
 			<br />
 			<div className="d-flex justify-center-between mt-5 align-content-center">
