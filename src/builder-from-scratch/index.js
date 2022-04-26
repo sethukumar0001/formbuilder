@@ -13,15 +13,8 @@ function BuilderFromScratch(props) {
 	const [selectedFields, setSelectedFields] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [editObjIndex, setEditObjIndex] = useState({});
-
 	const [previewOpen, setPreviewOpen] = useState(false);
 
-	/* -------------------------------------------------------------------------- */
-	/*                               UseEffect Section                            */
-	/* -------------------------------------------------------------------------- */
-	/* -------------------------------------------------------------------------- */
-	/*                               API Section                                  */
-	/* -------------------------------------------------------------------------- */
 	/* -------------------------------------------------------------------------- */
 	/*                               Onchange section                             */
 	/* -------------------------------------------------------------------------- */
