@@ -4,6 +4,7 @@ import { SchemaTypes } from "./types";
 import DeleteLogo from "../svg/delete.svg";
 import { handleDeleteFields, handleSelectFields } from "./helper";
 import EditModal from "./modal/editModal";
+import PreviewModal from "./modal/previewModal";
 function BuilderFromScratch(props) {
 	/* -------------------------------------------------------------------------- */
 	/*                               UseState Section                             */
@@ -12,6 +13,8 @@ function BuilderFromScratch(props) {
 	const [selectedFields, setSelectedFields] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [editObjIndex, setEditObjIndex] = useState({});
+
+	const [previewOpen, setPreviewOpen] = useState(false);
 
 	/* -------------------------------------------------------------------------- */
 	/*                               UseEffect Section                            */
@@ -25,6 +28,9 @@ function BuilderFromScratch(props) {
 	const handleModal = (item) => {
 		setEditObjIndex(item);
 		setIsOpen(!isOpen);
+	};
+	const handleModalPreview = () => {
+		setPreviewOpen(!previewOpen);
 	};
 
 	const handleEditObject = (e) => {
@@ -50,10 +56,25 @@ function BuilderFromScratch(props) {
 			})
 		);
 	};
+	console.log(selectedFields);
+
+	const handleChangePreview = (name,value,key,type) => {
+		if(type === 'string'){
+			setSelectedFields(
+				selectedFields.map((x, index) => {
+					if (index !== key) return x;
+					return {
+						...x,
+						[name]: value,
+					};
+				})
+			);
+		}
+	}
 	return (
 		<Fragment>
 			<div style={{ float: "right", marginRight: "30px", marginTop: "30px" }}>
-				<Button>Preview</Button>
+				<Button onClick={handleModalPreview}>Preview</Button>
 			</div>
 			<br />
 			<div className="d-flex justify-center-between mt-5 align-content-center">
@@ -187,6 +208,14 @@ function BuilderFromScratch(props) {
 				handleEditObject={handleEditObject}
 				handleEditObjectBoolean={handleEditObjectBoolean}
 			/>
+			{previewOpen && (
+				<PreviewModal
+					isOpen={previewOpen}
+					handleModal={handleModalPreview}
+					selectedFields={selectedFields}
+					handleChangePreview={handleChangePreview}
+				/>
+			)}
 		</Fragment>
 	);
 }
