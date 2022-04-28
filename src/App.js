@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BuilderFromNPM from "./builder-from-npm";
-import BuilderFromScratch from "./builder-from-scratch";
-import MainPage from "./main";
+// import BuilderFromScratch from "./builder-from-scratch";
+// import MainPage from "./main";
 
 function App(props) {
 	return (
