@@ -8,9 +8,11 @@ function App(props) {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route exact path="/" element={<MainPage />} />
+				{/* <Route exact path="/" element={<MainPage />} />
 				<Route path="/from-scratch" element={<BuilderFromScratch />} />
-				<Route path="/from-builder" element={<BuilderFromNPM />} />
+				<Route path="/from-builder" element={<BuilderFromNPM />} /> */}
+								<Route path="/" element={<BuilderFromNPM />} />
+
 			</Routes>
 		</BrowserRouter>
 	);

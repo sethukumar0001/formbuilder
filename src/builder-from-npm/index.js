@@ -1,10 +1,6 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Form from "react-jsonschema-form";
-import {
-	Card,
-	Row,
-	Col,
-} from "reactstrap";
+import { Card, Row, Col } from "reactstrap";
 import { SchemaTypes } from "./types";
 import DeleteLogo from "../svg/delete.svg";
 import DuplicateAddModal from "./modal/dupAddModal";
@@ -13,6 +9,8 @@ import SettingsModal from "./modal/settingsModal";
 import UiSchemaModal from "./modal/uiSchemaModal";
 import SchemaModal from "./modal/schemaModal";
 import EditModal from "./modal/editModal";
+import PermissionModal from "./modal/permissionModal";
+
 function BuilderFromNPM() {
 	/* -------------------------------------------------------------------------- */
 	/*                               UseState Section                             */
@@ -21,10 +19,31 @@ function BuilderFromNPM() {
 
 	const [schema, setSchema] = useState({
 		title: "Dynamic Schema Form",
-		properties: {},
+		properties: {
+			email: {
+				type: "string",
+				format: "email",
+				title: "email",
+				id: 0,
+			},
+			uri: {
+				type: "string",
+				format: "uri",
+				title: "uri",
+				id: 1,
+			},
+			number: {
+				title: "Number",
+				type: "number",
+				id: 8,
+			},
+		},
 	});
 	// const [uiSchema, setUiSchema] = useState({})
-	const [formData] = useState({});
+	const [formData] = useState({
+		uri: "www.test.com",
+		number: "1234567890",
+	});
 	const [isOpen, setIsOpen] = useState(false);
 	// settings
 	const [disabled, setDisabled] = useState(false);
@@ -40,9 +59,38 @@ function BuilderFromNPM() {
 	const [editedTitle, setEditedTitle] = useState("");
 	const [deleteName, setDeleteName] = useState("");
 
+	const [perModal, setPerModal] = useState(false);
+	const [permissionObj] = useState({
+		email: {
+			"ui:widget": "hidden",
+			"value":0
+		},
+		uri: {
+			"ui:disabled": true,
+			"value":1
+		},
+		number: {
+			"ui:readonly": true,
+			"value":2
+		},
+	});
+
 	/* -------------------------------------------------------------------------- */
 	/*                               UseEffect Section                            */
 	/* -------------------------------------------------------------------------- */
+
+	useEffect(() => {
+		let properties = Object.keys(schema.properties);
+		let obj = {};
+		if (properties.length > 0) {
+			properties.map((item) => {
+				return Object.assign(obj, { [item]: permissionObj[item] });
+			});
+		}
+		setUiSchema(obj);
+	}, [permissionObj, schema.properties]);
+	console.log(uiSchema);
+
 	/* -------------------------------------------------------------------------- */
 	/*                               Onchange section                             */
 	/* -------------------------------------------------------------------------- */
@@ -64,6 +112,9 @@ function BuilderFromNPM() {
 	const handleDeleteModal = (item) => {
 		setDeleteName(item);
 		setDeleteModal(!deleteModal);
+	};
+	const handleModalPer = () => {
+		setPerModal(!perModal);
 	};
 
 	const handleChangeSchema = (e) => {
@@ -182,7 +233,23 @@ function BuilderFromNPM() {
 				>
 					Settings
 				</div>
+				<div
+					className="text-center mt-3"
+					style={{
+						cursor: "pointer",
+						marginLeft: 20,
+						borderWidth: "1px",
+						borderColor: "lightGray",
+						borderStyle: "solid",
+						padding: "5px",
+						borderRadius: "5px",
+					}}
+					onClick={handleModalPer}
+				>
+					Permission Schema
+				</div>
 			</div>
+
 			<div className="d-flex justify-center-between mt-5 align-content-center">
 				<div style={{ width: "33%" }} className="p-2">
 					<Card style={{ minHeight: "610px" }}>
@@ -319,6 +386,11 @@ function BuilderFromNPM() {
 					deleteName={deleteName}
 					handleDeleteModal={handleDeleteModal}
 					handleDelete={handleDelete}
+				/>
+				<PermissionModal
+					handleModal={handleModalPer}
+					isOpen={perModal}
+					permissionObj={permissionObj}
 				/>
 			</div>
 		</Fragment>
