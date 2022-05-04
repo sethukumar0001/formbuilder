@@ -63,17 +63,30 @@ function BuilderFromNPM() {
 	const [permissionObj] = useState({
 		email: {
 			"ui:widget": "hidden",
-			"value":0
+			// "value":0
 		},
 		uri: {
 			"ui:disabled": true,
-			"value":1
+			// "value":1
 		},
 		number: {
 			"ui:readonly": true,
+			// "value":2
+		},
+	});
+
+	const [permission] = useState({
+		email: {
+			"value":0
+		},
+		uri: {
+			"value":1
+		},
+		number: {
 			"value":2
 		},
 	});
+
 
 	/* -------------------------------------------------------------------------- */
 	/*                               UseEffect Section                            */
@@ -218,7 +231,7 @@ function BuilderFromNPM() {
 				>
 					View UI Schema
 				</div>
-				<div
+				{/* <div
 					className="text-center mt-3"
 					style={{
 						cursor: "pointer",
@@ -232,7 +245,7 @@ function BuilderFromNPM() {
 					onClick={handleModal4}
 				>
 					Settings
-				</div>
+				</div> */}
 				<div
 					className="text-center mt-3"
 					style={{
@@ -390,7 +403,7 @@ function BuilderFromNPM() {
 				<PermissionModal
 					handleModal={handleModalPer}
 					isOpen={perModal}
-					permissionObj={permissionObj}
+					permissionObj={permission}
 				/>
 			</div>
 		</Fragment>
